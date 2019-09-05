@@ -12,8 +12,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
 // Mongoose 
-mongoose.connect("mongodb://localhost:27017/todolistDB", {useNewUrlParser: true})
+mongoose.connect("mongodb+srv://admin-jordan:Test123@jordancluster-zsgem.mongodb.net/todolistDB", {useNewUrlParser: true})
 
 const itemsSchema = {
   name: String
@@ -74,7 +75,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/:customListName", function(req, res) {
-  const customListName = _.capitalize(req.params.customListName)
+const customListName = req.params.customListName
 List.findOne({name: customListName}, function(err, foundList) {
   if(!err) {
     if(!foundList) {
@@ -147,12 +148,12 @@ app.get("/about", function(req, res){
 
 let port = process.env.PORT;
 if(port == null || port == "") {
-  port = 3000
+  port = 3000;
 }
-app.list(port); 
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+
+app.listen(port, function() {
+  console.log("Server started Successfully");
 });
 
 
